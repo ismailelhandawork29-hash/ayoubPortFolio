@@ -1,0 +1,76 @@
+<section id="hero" class="hero">
+  <div class="hero-background">
+    <div class="gradient-orb orb-1"></div>
+    <div class="gradient-orb orb-2"></div>
+    <div class="gradient-orb orb-3"></div>
+    <div class="grid-overlay"></div>
+  </div>
+  <div class="container">
+    <div class="hero-content">
+      <div class="hero-text">
+        <h1 class="hero-name">
+          <span class="greeting">Salut, je suis</span>
+          <span class="name">Ayoub El Handa</span>
+        </h1>
+        <h2 class="hero-title">
+          <span class="typed-text">{{ typedText }}</span>
+          <span class="cursor">|</span>
+        </h2>
+        <p class="hero-description">
+          Passionné par le développement web et mobile, je crée des expériences numériques 
+          innovantes et performantes. Disponible pour un CDI à partir de mars 2026.
+        </p>
+        <div class="hero-buttons">
+          <button class="btn btn-primary" (click)="scrollToContact()">
+            <span>Me contacter</span>
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+              <path d="M4 10H16M16 10L11 5M16 10L11 15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </button>
+          <a href="#about" class="btn btn-secondary">
+            <span>En savoir plus</span>
+          </a>
+        </div>
+        <div class="hero-social">
+          <a href="mailto:elhandayo@gmail.com" class="social-link" aria-label="Email">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+              <path d="M4 4H20C21.1 4 22 4.9 22 6V18C22 19.1 21.1 20 20 20H4C2.9 20 2 19.1 2 18V6C2 4.9 2.9 4 4 4Z" stroke="currentColor" stroke-width="2"/>
+              <path d="M22 6L12 13L2 6" stroke="currentColor" stroke-width="2"/>
+            </svg>
+          </a>
+          <a href="tel:+33651829227" class="social-link" aria-label="Téléphone">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+              <path d="M22 16.92V19.92C22 20.52 21.52 21 20.92 21C9.4 21 0 11.6 0 0.08C0 -0.52 0.48 -1 1.08 -1H4.08C4.68 -1 5.16 -0.52 5.16 0.08V3.08C5.16 3.68 4.68 4.16 4.08 4.16H2.04C2.64 8.08 6.32 11.76 10.24 12.36V10.32C10.24 9.72 10.72 9.24 11.32 9.24H14.32C14.92 9.24 15.4 9.72 15.4 10.32V13.32C15.4 13.92 14.92 14.4 14.32 14.4H11.32" stroke="currentColor" stroke-width="2"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="floating-card card-1">
+          <div class="card-content">
+            <div class="card-icon">💻</div>
+            <div class="card-text">Full Stack</div>
+          </div>
+        </div>
+        <div class="floating-card card-2">
+          <div class="card-content">
+            <div class="card-icon">🚀</div>
+            <div class="card-text">Innovation</div>
+          </div>
+        </div>
+        <div class="floating-card card-3">
+          <div class="card-content">
+            <div class="card-icon">⚡</div>
+            <div class="card-text">Performance</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="scroll-indicator">
+    <div class="mouse">
+      <div class="wheel"></div>
+    </div>
+  </div>
+</section>
+

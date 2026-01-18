@@ -1,0 +1,156 @@
+.experience-section {
+  background: linear-gradient(180deg, var(--bg-darker) 0%, var(--bg-dark) 100%);
+  position: relative;
+
+  .timeline {
+    position: relative;
+    padding: 40px 0;
+
+    &::before {
+      content: '';
+      position: absolute;
+      left: 30px;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: var(--gradient-primary);
+    }
+
+    .timeline-item {
+      position: relative;
+      padding-left: 80px;
+      margin-bottom: 50px;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+
+      .timeline-marker {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 60px;
+        height: 60px;
+        background: var(--bg-dark);
+        border: 3px solid var(--primary-color);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 1;
+        box-shadow: 0 0 20px rgba(0, 245, 255, 0.5);
+
+        .marker-icon {
+          font-size: 1.5rem;
+        }
+      }
+
+      .timeline-content {
+        .experience-card {
+          background: rgba(255, 255, 255, 0.03);
+          backdrop-filter: blur(10px);
+          border: 1px solid rgba(0, 245, 255, 0.2);
+          border-radius: 20px;
+          padding: 30px;
+          transition: all 0.3s ease;
+          position: relative;
+          overflow: hidden;
+
+          &::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: var(--gradient-primary);
+          }
+
+          &:hover {
+            transform: translateX(10px);
+            border-color: var(--primary-color);
+            box-shadow: 0 10px 30px rgba(0, 245, 255, 0.2);
+          }
+
+          .experience-header {
+            margin-bottom: 20px;
+
+            .company-name {
+              font-size: 1.8rem;
+              color: var(--primary-color);
+              margin-bottom: 8px;
+            }
+
+            .position {
+              font-size: 1.2rem;
+              color: var(--text-primary);
+              font-weight: 600;
+              margin-bottom: 10px;
+            }
+
+            .location-period {
+              display: flex;
+              gap: 20px;
+              flex-wrap: wrap;
+              color: var(--text-secondary);
+              font-size: 0.95rem;
+
+              .location, .period {
+                display: flex;
+                align-items: center;
+                gap: 5px;
+              }
+            }
+          }
+
+          .experience-body {
+            .achievements-list {
+              list-style: none;
+              padding: 0;
+              margin: 0;
+
+              li {
+                display: flex;
+                align-items: start;
+                gap: 12px;
+                padding: 10px 0;
+                color: var(--text-secondary);
+                line-height: 1.6;
+
+                .achievement-icon {
+                  color: var(--primary-color);
+                  font-weight: bold;
+                  flex-shrink: 0;
+                  margin-top: 2px;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  @media (max-width: 768px) {
+    .timeline {
+      &::before {
+        left: 20px;
+      }
+
+      .timeline-item {
+        padding-left: 60px;
+
+        .timeline-marker {
+          width: 40px;
+          height: 40px;
+          left: -10px;
+
+          .marker-icon {
+            font-size: 1.2rem;
+          }
+        }
+      }
+    }
+  }
+}
+

@@ -1,0 +1,19 @@
+<section id="education" class="section education-section">
+  <div class="container">
+    <h2 class="section-title">Diplômes et Formations</h2>
+    <div class="education-grid">
+      <div class="education-card" *ngFor="let edu of educations">
+        <div class="card-glow"></div>
+        <div class="education-icon">{{ edu.icon }}</div>
+        <div class="education-content">
+          <h3 class="degree">{{ edu.degree }}</h3>
+          <p class="institution">{{ edu.institution }}</p>
+          <p class="location">📍 {{ edu.location }}</p>
+          <p class="period">📅 {{ edu.period }}</p>
+          <p class="description">{{ edu.description }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+

@@ -1,0 +1,23 @@
+<nav class="navbar" [class.scrolled]="isScrolled">
+  <div class="container">
+    <div class="navbar-content">
+      <div class="logo">
+        <span class="logo-text">AE</span>
+      </div>
+      <ul class="nav-links" [class.active]="isMenuOpen">
+        <li><a (click)="scrollToSection('hero')" class="nav-link">Accueil</a></li>
+        <li><a (click)="scrollToSection('about')" class="nav-link">À propos</a></li>
+        <li><a (click)="scrollToSection('skills')" class="nav-link">Compétences</a></li>
+        <li><a (click)="scrollToSection('experience')" class="nav-link">Expérience</a></li>
+        <li><a (click)="scrollToSection('education')" class="nav-link">Formation</a></li>
+        <li><a (click)="scrollToSection('contact')" class="nav-link">Contact</a></li>
+      </ul>
+      <button class="menu-toggle" (click)="toggleMenu()" [class.active]="isMenuOpen">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
