@@ -7,7 +7,6 @@ import { Component } from '@angular/core';
 })
 export class AboutComponent {
   languages = [
-    { name: 'Arabe', level: 'Langue maternelle', icon: '🌍' },
     { name: 'Français', level: 'Bilingue', icon: '🇫🇷' },
     { name: 'Anglais', level: 'Avancé', icon: '🇬🇧' }
   ];

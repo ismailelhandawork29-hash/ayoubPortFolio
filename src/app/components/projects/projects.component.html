@@ -1,0 +1,137 @@
+<section id="projects" class="projects-section section">
+  <div class="container">
+    <h2 class="section-title">Projets Réalisés</h2>
+
+    <!-- Compact Project Cards -->
+    <div class="projects-grid">
+      <div class="project-card-compact" *ngFor="let project of projects" (click)="openProject(project)">
+        <!-- Preview Image -->
+        <div class="card-image" *ngIf="project.images && project.images.length > 0">
+          <img [src]="project.images[0]" [alt]="project.title">
+          <div class="image-overlay">
+            <span class="view-details">Voir les détails</span>
+          </div>
+        </div>
+
+        <!-- Card Content -->
+        <div class="card-compact-content">
+          <div class="project-number">Projet {{ project.id }}</div>
+          <h3 class="card-title">{{ project.title }}</h3>
+          <p class="card-subtitle">{{ project.subtitle }}</p>
+          
+          <!-- Skills Preview -->
+          <div class="skills-preview">
+            <span class="skill-badge" *ngFor="let skill of project.skills.slice(0, 3)">{{ skill }}</span>
+            <span class="more-badge" *ngIf="project.skills.length > 3">+{{ project.skills.length - 3 }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Popup -->
+  <div class="modal-overlay" *ngIf="selectedProject" (click)="closeModal()">
+    <div class="modal-content" (click)="$event.stopPropagation()">
+      <!-- Close Button -->
+      <button class="modal-close" (click)="closeModal()">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+
+      <div class="modal-body">
+        <!-- Project Header -->
+        <div class="modal-header">
+          <div class="project-number">Projet {{ selectedProject.id }}</div>
+          <h2 class="modal-title">{{ selectedProject.title }}</h2>
+          <p class="modal-subtitle">{{ selectedProject.subtitle }}</p>
+          <a [href]="selectedProject.url" target="_blank" rel="noopener noreferrer" class="project-link" (click)="$event.stopPropagation()">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+              <polyline points="15 3 21 3 21 9"></polyline>
+              <line x1="10" y1="14" x2="21" y2="3"></line>
+            </svg>
+            {{ selectedProject.url }}
+          </a>
+        </div>
+
+        <!-- Image Slideshow -->
+        <div class="modal-slideshow" *ngIf="selectedProject.images && selectedProject.images.length > 0">
+          <div class="slideshow-container">
+            <div class="slide" *ngFor="let image of selectedProject.images; let i = index" 
+                 [class.active]="i === selectedProject.currentSlide">
+              <img [src]="image" [alt]="selectedProject.title + ' - Image ' + (i + 1)">
+            </div>
+
+            <!-- Navigation Arrows -->
+            <button class="slide-nav prev" (click)="prevSlide(selectedProject)" aria-label="Previous slide" *ngIf="selectedProject.images.length > 1">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="15 18 9 12 15 6"></polyline>
+              </svg>
+            </button>
+            <button class="slide-nav next" (click)="nextSlide(selectedProject)" aria-label="Next slide" *ngIf="selectedProject.images.length > 1">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="9 18 15 12 9 6"></polyline>
+              </svg>
+            </button>
+
+            <!-- Slide Indicators -->
+            <div class="slide-indicators" *ngIf="selectedProject.images.length > 1">
+              <button *ngFor="let image of selectedProject.images; let i = index"
+                      class="indicator"
+                      [class.active]="i === selectedProject.currentSlide"
+                      (click)="goToSlide(selectedProject, i)"
+                      [attr.aria-label]="'Go to slide ' + (i + 1)">
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Project Details -->
+        <div class="modal-details">
+          <div class="detail-section">
+            <h4 class="detail-title">Contexte</h4>
+            <p>{{ selectedProject.context }}</p>
+          </div>
+
+          <div class="detail-section">
+            <h4 class="detail-title">Objectif</h4>
+            <p>{{ selectedProject.objective }}</p>
+          </div>
+
+          <div class="detail-section">
+            <h4 class="detail-title">Ce que j'ai réalisé</h4>
+            <ul class="achievements-list">
+              <li *ngFor="let achievement of selectedProject.achievements">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
+                {{ achievement }}
+              </li>
+            </ul>
+          </div>
+
+          <div class="detail-section">
+            <h4 class="detail-title">Résultat</h4>
+            <p>{{ selectedProject.result }}</p>
+          </div>
+
+          <div class="detail-section skills-section">
+            <h4 class="detail-title">Compétences mises en œuvre</h4>
+            <div class="skills-tags">
+              <span class="skill-tag" *ngFor="let skill of selectedProject.skills">{{ skill }}</span>
+            </div>
+          </div>
+
+          <div class="detail-section skills-section" *ngIf="selectedProject.technicalSkills">
+            <h4 class="detail-title">Compétences techniques</h4>
+            <div class="skills-tags">
+              <span class="skill-tag tech-tag" *ngFor="let skill of selectedProject.technicalSkills">{{ skill }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

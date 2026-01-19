@@ -16,6 +16,13 @@ export class NavbarComponent {
 
   toggleMenu() {
     this.isMenuOpen = !this.isMenuOpen;
+    
+    // Prevent body scroll on mobile when menu is open
+    if (this.isMenuOpen) {
+      document.body.classList.add('menu-open');
+    } else {
+      document.body.classList.remove('menu-open');
+    }
   }
 
   scrollToSection(sectionId: string) {
@@ -24,6 +31,7 @@ export class NavbarComponent {
       element.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
     this.isMenuOpen = false;
+    document.body.classList.remove('menu-open');
   }
 }
 

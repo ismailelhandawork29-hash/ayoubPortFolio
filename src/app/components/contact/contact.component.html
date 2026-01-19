@@ -109,5 +109,123 @@
       </form>
     </div>
   </div>
+
+  <!-- Mobile Form Modal -->
+  <div class="mobile-form-overlay" *ngIf="showFormModal" (click)="closeFormModal()">
+    <div class="mobile-form-container" (click)="$event.stopPropagation()">
+      <div class="mobile-form-header">
+        <h3>Contactez-moi</h3>
+        <button class="close-modal-btn" (click)="closeFormModal()">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <path d="M6 6L18 18M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </button>
+      </div>
+      
+      <form class="mobile-contact-form" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+          <label for="mobile-name">Nom</label>
+          <input 
+            type="text" 
+            id="mobile-name" 
+            name="name" 
+            [(ngModel)]="formData.name"
+            required
+            placeholder="Votre nom"
+          >
+        </div>
+        
+        <div class="form-group">
+          <label for="mobile-email">Email</label>
+          <input 
+            type="email" 
+            id="mobile-email" 
+            name="email" 
+            [(ngModel)]="formData.email"
+            required
+            placeholder="votre.email@example.com"
+          >
+        </div>
+        
+        <div class="form-group">
+          <label for="mobile-subject">Sujet</label>
+          <input 
+            type="text" 
+            id="mobile-subject" 
+            name="subject" 
+            [(ngModel)]="formData.subject"
+            required
+            placeholder="Sujet de votre message"
+          >
+        </div>
+        
+        <div class="form-group">
+          <label for="mobile-message">Message</label>
+          <textarea 
+            id="mobile-message" 
+            name="message" 
+            [(ngModel)]="formData.message"
+            required
+            rows="5"
+            placeholder="Votre message..."
+          ></textarea>
+        </div>
+        
+        <button type="submit" class="submit-btn" [disabled]="isSubmitting">
+          <span *ngIf="!isSubmitting">Envoyer</span>
+          <span *ngIf="isSubmitting">Envoi...</span>
+          <svg *ngIf="!isSubmitting" width="20" height="20" viewBox="0 0 20 20" fill="none">
+            <path d="M4 10H16M16 10L11 5M16 10L11 15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Custom Notification Modal -->
+  <div class="notification-overlay" *ngIf="showNotification" (click)="closeNotification()">
+    <div class="notification-modal" [class.success]="notificationType === 'success'" 
+         [class.error]="notificationType === 'error'" 
+         [class.info]="notificationType === 'info'"
+         (click)="$event.stopPropagation()">
+      <div class="notification-icon">
+        <svg *ngIf="notificationType === 'success'" width="48" height="48" viewBox="0 0 48 48" fill="none">
+          <circle cx="24" cy="24" r="22" stroke="currentColor" stroke-width="3"/>
+          <path d="M14 24L20 30L34 16" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <svg *ngIf="notificationType === 'error'" width="48" height="48" viewBox="0 0 48 48" fill="none">
+          <circle cx="24" cy="24" r="22" stroke="currentColor" stroke-width="3"/>
+          <path d="M16 16L32 32M32 16L16 32" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+        </svg>
+        <svg *ngIf="notificationType === 'info'" width="48" height="48" viewBox="0 0 48 48" fill="none">
+          <circle cx="24" cy="24" r="22" stroke="currentColor" stroke-width="3"/>
+          <path d="M24 16V24M24 32V32.01" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <div class="notification-content">
+        <p>{{ notificationMessage }}</p>
+      </div>
+      <button class="notification-close" (click)="closeNotification()">
+        OK
+      </button>
+    </div>
+  </div>
 </section>
 
+<!-- Mobile Sticky Bottom Menu (Mobile Only) -->
+<div class="mobile-sticky-menu">
+  <button class="mobile-action-btn message-btn" (click)="openFormModal()">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+      <path d="M4 4H20C21.1 4 22 4.9 22 6V18C22 19.1 21.1 20 20 20H4C2.9 20 2 19.1 2 18V6C2 4.9 2.9 4 4 4Z" stroke="currentColor" stroke-width="2"/>
+      <path d="M22 6L12 13L2 6" stroke="currentColor" stroke-width="2"/>
+    </svg>
+    <span>Message</span>
+  </button>
+  
+  <button class="mobile-action-btn phone-btn" (click)="callPhone()">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+      <path d="M22 16.92V19.92C22 20.52 21.52 21 20.92 21C9.4 21 0 11.6 0 0.08C0 -0.52 0.48 -1 1.08 -1H4.08C4.68 -1 5.16 -0.52 5.16 0.08V3.08C5.16 3.68 4.68 4.16 4.08 4.16H2.04C2.64 8.08 6.32 11.76 10.24 12.36V10.32C10.24 9.72 10.72 9.24 11.32 9.24H14.32C14.92 9.24 15.4 9.72 15.4 10.32V13.32C15.4 13.92 14.92 14.4 14.32 14.4H11.32" stroke="currentColor" stroke-width="2"/>
+    </svg>
+    <span>Appeler</span>
+  </button>
+</div>
