@@ -9,7 +9,7 @@
     <div class="hero-content">
       <div class="hero-text">
         <h1 class="hero-name">
-          <span class="greeting">Salut, je suis</span>
+          <span class="greeting">{{ translationService.translate('hero.greeting') }}</span>
           <span class="name">Ayoub El Handa</span>
         </h1>
         <h2 class="hero-title">
@@ -17,18 +17,17 @@
           <span class="cursor">|</span>
         </h2>
         <p class="hero-description">
-          Passionné par le développement web et mobile, je crée des expériences numériques 
-          innovantes et performantes. Disponible pour un CDI à partir de mars 2026.
+          {{ translationService.translate('hero.description') }}
         </p>
         <div class="hero-buttons">
           <button class="btn btn-primary" (click)="scrollToContact()">
-            <span>Me contacter</span>
+            <span>{{ translationService.translate('hero.contactBtn') }}</span>
             <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
               <path d="M4 10H16M16 10L11 5M16 10L11 15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
             </svg>
           </button>
           <a href="#about" class="btn btn-secondary">
-            <span>En savoir plus</span>
+            <span>{{ translationService.translate('hero.learnMoreBtn') }}</span>
           </a>
         </div>
         <div class="hero-social">

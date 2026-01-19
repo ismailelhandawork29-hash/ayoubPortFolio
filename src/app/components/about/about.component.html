@@ -1,41 +1,33 @@
 <section id="about" class="section about-section">
   <div class="container">
-    <h2 class="section-title">À propos de moi</h2>
+    <h2 class="section-title">{{ translationService.translate('about.title') }}</h2>
     <div class="about-content">
       <div class="about-text">
         <p class="intro-text">
-          Développeur Full Stack passionné par l'innovation technologique, je crée des expériences 
-          numériques qui allient performance, esthétique et fonctionnalité. Fort d'une expertise en 
-          développement web et mobile, je transforme des idées complexes en solutions élégantes et scalables.
+          {{ translationService.translate('about.intro') }}
         </p>
         <p>
-          Diplômé Expert en Ingénierie Informatique de l'ESGI Paris, j'ai acquis une maîtrise approfondie 
-          des technologies modernes, de l'architecture logicielle aux pratiques DevOps. Mon parcours m'a 
-          permis de mener à bien des projets ambitieux, de la conception à la mise en production, en passant 
-          par l'optimisation continue.
+          {{ translationService.translate('about.paragraph1') }}
         </p>
         <p>
-          Actuellement en recherche d'un CDI à partir de mars 2026, je souhaite rejoindre une équipe dynamique 
-          où je pourrai apporter mon expertise technique, ma créativité et ma passion pour l'excellence. 
-          Toujours en veille technologique, je suis prêt à relever de nouveaux défis et à contribuer à des 
-          projets innovants qui ont un impact réel.
+          {{ translationService.translate('about.paragraph2') }}
         </p>
         
         <div class="info-grid">
           <div class="info-item">
-            <span class="info-label">Localisation</span>
-            <span class="info-value">📍 Paris, France</span>
+            <span class="info-label">{{ translationService.translate('about.locationLabel') }}</span>
+            <span class="info-value">📍 {{ translationService.translate('about.locationValue') }}</span>
           </div>
           <div class="info-item">
-            <span class="info-label">Disponibilité</span>
-            <span class="info-value">✅ CDI à partir de mars 2026</span>
+            <span class="info-label">{{ translationService.translate('about.availabilityLabel') }}</span>
+            <span class="info-value">✅ {{ translationService.translate('about.availabilityValue') }}</span>
           </div>
         </div>
       </div>
       
       <div class="about-details">
         <div class="detail-card">
-          <h3>Langues</h3>
+          <h3>{{ translationService.translate('about.languagesTitle') }}</h3>
           <div class="languages-list">
             <div class="language-item" *ngFor="let lang of languages">
               <span class="lang-icon">{{ lang.icon }}</span>
@@ -48,7 +40,7 @@
         </div>
         
         <div class="detail-card">
-          <h3>Centres d'intérêt</h3>
+          <h3>{{ translationService.translate('about.interestsTitle') }}</h3>
           <div class="interests-list">
             <div class="interest-item" *ngFor="let interest of interests">
               <span class="interest-icon">{{ interest.icon }}</span>

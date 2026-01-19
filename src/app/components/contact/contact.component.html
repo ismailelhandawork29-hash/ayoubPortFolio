@@ -1,12 +1,11 @@
 <section id="contact" class="section contact-section">
   <div class="container">
-    <h2 class="section-title">Contactez-moi</h2>
+    <h2 class="section-title">{{ translationService.translate('contact.title') }}</h2>
     <div class="contact-content">
       <div class="contact-info">
-        <h3>Disponible pour de nouvelles opportunités</h3>
+        <h3>{{ translationService.translate('contact.subtitle') }}</h3>
         <p class="contact-description">
-          Je suis disponible pour un CDI à partir de mars 2026. 
-          N'hésitez pas à me contacter pour discuter de vos projets !
+          {{ translationService.translate('contact.description') }}
         </p>
         
         <div class="contact-details">
@@ -18,7 +17,7 @@
               </svg>
             </div>
             <div class="contact-text">
-              <span class="contact-label">Email</span>
+              <span class="contact-label">{{ translationService.translate('contact.emailLabel') }}</span>
               <span class="contact-value">{{ contactInfo.email }}</span>
             </div>
           </div>
@@ -30,7 +29,7 @@
               </svg>
             </div>
             <div class="contact-text">
-              <span class="contact-label">Téléphone</span>
+              <span class="contact-label">{{ translationService.translate('contact.phoneLabel') }}</span>
               <span class="contact-value">{{ contactInfo.phone }}</span>
             </div>
           </div>
@@ -43,7 +42,7 @@
               </svg>
             </div>
             <div class="contact-text">
-              <span class="contact-label">Localisation</span>
+              <span class="contact-label">{{ translationService.translate('contact.locationLabel') }}</span>
               <span class="contact-value">{{ contactInfo.location }}</span>
             </div>
           </div>
@@ -52,56 +51,56 @@
       
       <form class="contact-form" (ngSubmit)="onSubmit()">
         <div class="form-group">
-          <label for="name">Nom</label>
+          <label for="name">{{ translationService.translate('contact.nameLabel') }}</label>
           <input 
             type="text" 
             id="name" 
             name="name" 
             [(ngModel)]="formData.name"
             required
-            placeholder="Votre nom"
+            [placeholder]="translationService.translate('contact.namePlaceholder')"
           >
         </div>
         
         <div class="form-group">
-          <label for="email">Email</label>
+          <label for="email">{{ translationService.translate('contact.emailLabel') }}</label>
           <input 
             type="email" 
             id="email" 
             name="email" 
             [(ngModel)]="formData.email"
             required
-            placeholder="votre.email@example.com"
+            [placeholder]="translationService.translate('contact.emailPlaceholder')"
           >
         </div>
         
         <div class="form-group">
-          <label for="subject">Sujet</label>
+          <label for="subject">{{ translationService.translate('contact.subjectLabel') }}</label>
           <input 
             type="text" 
             id="subject" 
             name="subject" 
             [(ngModel)]="formData.subject"
             required
-            placeholder="Sujet de votre message"
+            [placeholder]="translationService.translate('contact.subjectPlaceholder')"
           >
         </div>
         
         <div class="form-group">
-          <label for="message">Message</label>
+          <label for="message">{{ translationService.translate('contact.messageLabel') }}</label>
           <textarea 
             id="message" 
             name="message" 
             [(ngModel)]="formData.message"
             required
             rows="6"
-            placeholder="Votre message..."
+            [placeholder]="translationService.translate('contact.messagePlaceholder')"
           ></textarea>
         </div>
         
         <button type="submit" class="submit-btn" [disabled]="isSubmitting">
-          <span *ngIf="!isSubmitting">Envoyer le message</span>
-          <span *ngIf="isSubmitting">Envoi en cours...</span>
+          <span *ngIf="!isSubmitting">{{ translationService.translate('contact.sendBtn') }}</span>
+          <span *ngIf="isSubmitting">{{ translationService.translate('contact.sendingBtn') }}</span>
           <svg *ngIf="!isSubmitting" width="20" height="20" viewBox="0 0 20 20" fill="none">
             <path d="M4 10H16M16 10L11 5M16 10L11 15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
           </svg>
@@ -114,7 +113,7 @@
   <div class="mobile-form-overlay" *ngIf="showFormModal" (click)="closeFormModal()">
     <div class="mobile-form-container" (click)="$event.stopPropagation()">
       <div class="mobile-form-header">
-        <h3>Contactez-moi</h3>
+        <h3>{{ translationService.translate('contact.title') }}</h3>
         <button class="close-modal-btn" (click)="closeFormModal()">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
             <path d="M6 6L18 18M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
@@ -124,56 +123,56 @@
       
       <form class="mobile-contact-form" (ngSubmit)="onSubmit()">
         <div class="form-group">
-          <label for="mobile-name">Nom</label>
+          <label for="mobile-name">{{ translationService.translate('contact.nameLabel') }}</label>
           <input 
             type="text" 
             id="mobile-name" 
             name="name" 
             [(ngModel)]="formData.name"
             required
-            placeholder="Votre nom"
+            [placeholder]="translationService.translate('contact.namePlaceholder')"
           >
         </div>
         
         <div class="form-group">
-          <label for="mobile-email">Email</label>
+          <label for="mobile-email">{{ translationService.translate('contact.emailLabel') }}</label>
           <input 
             type="email" 
             id="mobile-email" 
             name="email" 
             [(ngModel)]="formData.email"
             required
-            placeholder="votre.email@example.com"
+            [placeholder]="translationService.translate('contact.emailPlaceholder')"
           >
         </div>
         
         <div class="form-group">
-          <label for="mobile-subject">Sujet</label>
+          <label for="mobile-subject">{{ translationService.translate('contact.subjectLabel') }}</label>
           <input 
             type="text" 
             id="mobile-subject" 
             name="subject" 
             [(ngModel)]="formData.subject"
             required
-            placeholder="Sujet de votre message"
+            [placeholder]="translationService.translate('contact.subjectPlaceholder')"
           >
         </div>
         
         <div class="form-group">
-          <label for="mobile-message">Message</label>
+          <label for="mobile-message">{{ translationService.translate('contact.messageLabel') }}</label>
           <textarea 
             id="mobile-message" 
             name="message" 
             [(ngModel)]="formData.message"
             required
             rows="5"
-            placeholder="Votre message..."
+            [placeholder]="translationService.translate('contact.messagePlaceholder')"
           ></textarea>
         </div>
         
         <button type="submit" class="submit-btn" [disabled]="isSubmitting">
-          <span *ngIf="!isSubmitting">Envoyer</span>
-          <span *ngIf="isSubmitting">Envoi...</span>
+          <span *ngIf="!isSubmitting">{{ translationService.translate('contact.sendBtnMobile') }}</span>
+          <span *ngIf="isSubmitting">{{ translationService.translate('contact.sendingBtnMobile') }}</span>
           <svg *ngIf="!isSubmitting" width="20" height="20" viewBox="0 0 20 20" fill="none">
             <path d="M4 10H16M16 10L11 5M16 10L11 15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
           </svg>
@@ -219,13 +218,13 @@
       <path d="M4 4H20C21.1 4 22 4.9 22 6V18C22 19.1 21.1 20 20 20H4C2.9 20 2 19.1 2 18V6C2 4.9 2.9 4 4 4Z" stroke="currentColor" stroke-width="2"/>
       <path d="M22 6L12 13L2 6" stroke="currentColor" stroke-width="2"/>
     </svg>
-    <span>Message</span>
+    <span>{{ translationService.translate('contact.messageBtn') }}</span>
   </button>
   
   <button class="mobile-action-btn phone-btn" (click)="callPhone()">
     <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
       <path d="M22 16.92V19.92C22 20.52 21.52 21 20.92 21C9.4 21 0 11.6 0 0.08C0 -0.52 0.48 -1 1.08 -1H4.08C4.68 -1 5.16 -0.52 5.16 0.08V3.08C5.16 3.68 4.68 4.16 4.08 4.16H2.04C2.64 8.08 6.32 11.76 10.24 12.36V10.32C10.24 9.72 10.72 9.24 11.32 9.24H14.32C14.92 9.24 15.4 9.72 15.4 10.32V13.32C15.4 13.92 14.92 14.4 14.32 14.4H11.32" stroke="currentColor" stroke-width="2"/>
     </svg>
-    <span>Appeler</span>
+    <span>{{ translationService.translate('contact.callBtn') }}</span>
   </button>
 </div>

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { TranslationService } from '../../services/translation.service';
 import emailjs from '@emailjs/browser';
 
 @Component({
@@ -7,6 +8,8 @@ import emailjs from '@emailjs/browser';
   styleUrls: ['./contact.component.scss']
 })
 export class ContactComponent {
+  constructor(public translationService: TranslationService) {}
+
   contactInfo = {
     email: 'elhandaayo@gmail.com',
     phone: '0651829227',

@@ -1,4 +1,5 @@
 import { Component, HostListener } from '@angular/core';
+import { TranslationService, Language } from '../../services/translation.service';
 
 @Component({
   selector: 'app-navbar',
@@ -8,6 +9,13 @@ import { Component, HostListener } from '@angular/core';
 export class NavbarComponent {
   isScrolled = false;
   isMenuOpen = false;
+  currentLang: Language = 'fr';
+
+  constructor(public translationService: TranslationService) {
+    this.translationService.currentLanguage$.subscribe(lang => {
+      this.currentLang = lang;
+    });
+  }
 
   @HostListener('window:scroll', [])
   onWindowScroll() {
@@ -23,6 +31,11 @@ export class NavbarComponent {
     } else {
       document.body.classList.remove('menu-open');
     }
+  }
+
+  toggleLanguage() {
+    const newLang: Language = this.currentLang === 'fr' ? 'en' : 'fr';
+    this.translationService.setLanguage(newLang);
   }
 
   scrollToSection(sectionId: string) {

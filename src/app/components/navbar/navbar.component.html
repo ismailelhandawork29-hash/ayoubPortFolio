@@ -5,19 +5,31 @@
         <span class="logo-text">AE</span>
       </div>
       <ul class="nav-links" [class.active]="isMenuOpen">
-        <li><a (click)="scrollToSection('hero')" class="nav-link">Accueil</a></li>
-        <li><a (click)="scrollToSection('about')" class="nav-link">À propos</a></li>
-        <li><a (click)="scrollToSection('skills')" class="nav-link">Compétences</a></li>
-        <li><a (click)="scrollToSection('experience')" class="nav-link">Expérience</a></li>
-        <li><a (click)="scrollToSection('education')" class="nav-link">Formation</a></li>
-        <li><a (click)="scrollToSection('projects')" class="nav-link">Projets</a></li>
-        <li><a (click)="scrollToSection('contact')" class="nav-link">Contact</a></li>
+        <li><a (click)="scrollToSection('hero')" class="nav-link">{{ translationService.translate('nav.home') }}</a></li>
+        <li><a (click)="scrollToSection('about')" class="nav-link">{{ translationService.translate('nav.about') }}</a></li>
+        <li><a (click)="scrollToSection('skills')" class="nav-link">{{ translationService.translate('nav.skills') }}</a></li>
+        <li><a (click)="scrollToSection('experience')" class="nav-link">{{ translationService.translate('nav.experience') }}</a></li>
+        <li><a (click)="scrollToSection('education')" class="nav-link">{{ translationService.translate('nav.education') }}</a></li>
+        <li><a (click)="scrollToSection('projects')" class="nav-link">{{ translationService.translate('nav.projects') }}</a></li>
+        <li><a (click)="scrollToSection('contact')" class="nav-link">{{ translationService.translate('nav.contact') }}</a></li>
+        <li class="lang-switcher-mobile">
+          <button class="lang-btn" (click)="toggleLanguage()" [attr.aria-label]="'Switch to ' + (currentLang === 'fr' ? 'English' : 'French')">
+            <span class="lang-flag">{{ currentLang === 'fr' ? '🇫🇷' : '🇬🇧' }}</span>
+            <span class="lang-text">{{ currentLang === 'fr' ? 'FR' : 'EN' }}</span>
+          </button>
+        </li>
       </ul>
-      <button class="menu-toggle" (click)="toggleMenu()" [class.active]="isMenuOpen">
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
+      <div class="navbar-actions">
+        <button class="lang-btn" (click)="toggleLanguage()" [attr.aria-label]="'Switch to ' + (currentLang === 'fr' ? 'English' : 'French')">
+          <span class="lang-flag">{{ currentLang === 'fr' ? '🇫🇷' : '🇬🇧' }}</span>
+          <span class="lang-text">{{ currentLang === 'fr' ? 'FR' : 'EN' }}</span>
+        </button>
+        <button class="menu-toggle" (click)="toggleMenu()" [class.active]="isMenuOpen">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
     </div>
   </div>
 </nav>
