@@ -37,6 +37,61 @@
     overflow: hidden;
     background: rgba(0, 0, 0, 0.3);
 
+    .card-slideshow {
+      position: relative;
+      width: 100%;
+      height: 100%;
+
+      .card-slide {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+        transition: opacity 0.6s ease-in-out;
+
+        &.active {
+          opacity: 1;
+          z-index: 1;
+        }
+
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          transition: transform 0.3s ease;
+        }
+      }
+
+      .card-indicators {
+        position: absolute;
+        bottom: 10px;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        gap: 6px;
+        z-index: 5;
+
+        .card-indicator {
+          width: 8px;
+          height: 8px;
+          border-radius: 50%;
+          background: rgba(255, 255, 255, 0.4);
+          border: 1px solid rgba(255, 255, 255, 0.6);
+          cursor: pointer;
+          transition: all 0.3s ease;
+
+          &.active {
+            background: var(--primary-color);
+            border-color: var(--primary-color);
+            box-shadow: 0 0 10px rgba(0, 245, 255, 0.6);
+            transform: scale(1.2);
+          }
+        }
+      }
+    }
+
     img {
       width: 100%;
       height: 100%;
@@ -56,6 +111,7 @@
       justify-content: center;
       opacity: 0;
       transition: opacity 0.3s ease;
+      z-index: 2;
 
       .view-details {
         color: white;
@@ -67,8 +123,12 @@
     }
   }
 
-  &:hover .card-image img {
+  &:hover .card-image .card-slide.active img {
     transform: scale(1.1);
+  }
+
+  &:hover .card-image .image-overlay {
+    opacity: 1;
   }
 
   .card-compact-content {
@@ -283,6 +343,35 @@
     position: relative;
     width: 100%;
     height: 450px;
+
+    .auto-slide-indicator {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 15px;
+      background: rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(0, 245, 255, 0.3);
+      border-radius: 50px;
+      color: var(--primary-color);
+      font-size: 0.85rem;
+      font-weight: 600;
+      z-index: 10;
+      transition: all 0.3s ease;
+
+      svg {
+        width: 16px;
+        height: 16px;
+      }
+
+      &:hover {
+        background: rgba(0, 245, 255, 0.1);
+        box-shadow: 0 0 15px rgba(0, 245, 255, 0.3);
+      }
+    }
 
     .slide {
       position: absolute;

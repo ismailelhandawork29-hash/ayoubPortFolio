@@ -4,10 +4,26 @@
 
     <!-- Compact Project Cards -->
     <div class="projects-grid">
-      <div class="project-card-compact" *ngFor="let project of projects" (click)="openProject(project)">
-        <!-- Preview Image -->
+      <div class="project-card-compact" *ngFor="let project of projects" 
+           (click)="openProject(project)"
+           (mouseenter)="pauseCardAutoSlide(project)"
+           (mouseleave)="resumeCardAutoSlide(project)">
+        <!-- Preview Image Slideshow -->
         <div class="card-image" *ngIf="project.images && project.images.length > 0">
-          <img [src]="project.images[0]" [alt]="project.title">
+          <div class="card-slideshow">
+            <div class="card-slide" *ngFor="let image of project.images; let i = index"
+                 [class.active]="i === project.currentSlide">
+              <img [src]="image" [alt]="project.title">
+            </div>
+            
+            <!-- Slide Indicators -->
+            <div class="card-indicators" *ngIf="project.images.length > 1">
+              <span *ngFor="let image of project.images; let i = index"
+                    class="card-indicator"
+                    [class.active]="i === project.currentSlide">
+              </span>
+            </div>
+          </div>
           <div class="image-overlay">
             <span class="view-details">Voir les détails</span>
           </div>
@@ -58,10 +74,21 @@
 
         <!-- Image Slideshow -->
         <div class="modal-slideshow" *ngIf="selectedProject.images && selectedProject.images.length > 0">
-          <div class="slideshow-container">
+          <div class="slideshow-container" 
+               (mouseenter)="pauseAutoSlide()" 
+               (mouseleave)="resumeAutoSlide()">
             <div class="slide" *ngFor="let image of selectedProject.images; let i = index" 
                  [class.active]="i === selectedProject.currentSlide">
               <img [src]="image" [alt]="selectedProject.title + ' - Image ' + (i + 1)">
+            </div>
+
+            <!-- Auto-slide indicator -->
+            <div class="auto-slide-indicator" *ngIf="selectedProject.images.length > 1">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10"/>
+                <polyline points="12 6 12 12 16 14"/>
+              </svg>
+              <span>Auto {{ isAutoSliding ? '▶' : '⏸' }}</span>
             </div>
 
             <!-- Navigation Arrows -->

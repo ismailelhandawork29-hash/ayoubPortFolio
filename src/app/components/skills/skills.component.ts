@@ -104,7 +104,8 @@ export class SkillsComponent implements OnInit, OnDestroy {
         icon: '🚀',
         skills: [
           { name: 'Docker', level: 80 },
-          { name: 'CI/CD', level: 70 }
+          { name: 'GitHub Actions', level: 75 },
+          { name: 'GitLab CI', level: 72 }
         ]
       },
       {

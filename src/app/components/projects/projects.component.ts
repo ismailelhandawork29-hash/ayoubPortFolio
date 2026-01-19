@@ -26,15 +26,28 @@ interface Project {
 export class ProjectsComponent implements OnInit, OnDestroy {
   selectedProject: Project | null = null;
   private langSubscription: Subscription | undefined;
+  private autoSlideInterval: any;
+  private cardAutoSlideIntervals: Map<number, any> = new Map();
+  isAutoSliding = true;
 
   constructor(public translationService: TranslationService) {}
 
   ngOnInit() {
     this.updateContent();
     
+    // Start auto-slide for all card images
+    setTimeout(() => {
+      this.startAllCardAutoSlides();
+    }, 500);
+    
     // Subscribe to language changes
     this.langSubscription = this.translationService.currentLanguage$.subscribe(() => {
       this.updateContent();
+      // Restart card auto-slides
+      this.stopAllCardAutoSlides();
+      setTimeout(() => {
+        this.startAllCardAutoSlides();
+      }, 500);
       // Close modal if open when language changes
       if (this.selectedProject) {
         const projectId = this.selectedProject.id;
@@ -54,6 +67,8 @@ export class ProjectsComponent implements OnInit, OnDestroy {
     if (this.langSubscription) {
       this.langSubscription.unsubscribe();
     }
+    this.stopAutoSlide();
+    this.stopAllCardAutoSlides();
   }
 
   updateContent() {
@@ -614,10 +629,84 @@ export class ProjectsComponent implements OnInit, OnDestroy {
   openProject(project: Project): void {
     this.selectedProject = project;
     document.body.style.overflow = 'hidden'; // Prevent background scrolling
+    this.startAutoSlide();
   }
 
   closeModal(): void {
+    this.stopAutoSlide();
     this.selectedProject = null;
     document.body.style.overflow = 'auto'; // Re-enable scrolling
+  }
+
+  startAutoSlide(): void {
+    this.stopAutoSlide(); // Clear any existing interval
+    this.isAutoSliding = true;
+    this.autoSlideInterval = setInterval(() => {
+      if (this.selectedProject && this.isAutoSliding) {
+        this.nextSlide(this.selectedProject);
+      }
+    }, 4000); // Change slide every 4 seconds
+  }
+
+  stopAutoSlide(): void {
+    if (this.autoSlideInterval) {
+      clearInterval(this.autoSlideInterval);
+      this.autoSlideInterval = null;
+    }
+  }
+
+  pauseAutoSlide(): void {
+    this.isAutoSliding = false;
+  }
+
+  resumeAutoSlide(): void {
+    this.isAutoSliding = true;
+  }
+
+  // Card auto-slide methods
+  startAllCardAutoSlides(): void {
+    this.projects.forEach(project => {
+      if (project.images && project.images.length > 1) {
+        this.startCardAutoSlide(project);
+      }
+    });
+  }
+
+  startCardAutoSlide(project: Project): void {
+    // Stop existing interval for this project
+    if (this.cardAutoSlideIntervals.has(project.id)) {
+      clearInterval(this.cardAutoSlideIntervals.get(project.id));
+    }
+
+    // Start new interval
+    const interval = setInterval(() => {
+      this.nextSlide(project);
+    }, 3000); // Change every 3 seconds for cards
+
+    this.cardAutoSlideIntervals.set(project.id, interval);
+  }
+
+  stopCardAutoSlide(project: Project): void {
+    if (this.cardAutoSlideIntervals.has(project.id)) {
+      clearInterval(this.cardAutoSlideIntervals.get(project.id));
+      this.cardAutoSlideIntervals.delete(project.id);
+    }
+  }
+
+  stopAllCardAutoSlides(): void {
+    this.cardAutoSlideIntervals.forEach((interval) => {
+      clearInterval(interval);
+    });
+    this.cardAutoSlideIntervals.clear();
+  }
+
+  pauseCardAutoSlide(project: Project): void {
+    this.stopCardAutoSlide(project);
+  }
+
+  resumeCardAutoSlide(project: Project): void {
+    if (project.images && project.images.length > 1) {
+      this.startCardAutoSlide(project);
+    }
   }
 }
