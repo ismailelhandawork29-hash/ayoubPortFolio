@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { TranslationService } from '../../services/translation.service';
+import { AnalyticsService } from '../../services/analytics.service';
 import emailjs from '@emailjs/browser';
 
 @Component({
@@ -8,7 +9,10 @@ import emailjs from '@emailjs/browser';
   styleUrls: ['./contact.component.scss']
 })
 export class ContactComponent {
-  constructor(public translationService: TranslationService) {}
+  constructor(
+    public translationService: TranslationService,
+    private analytics: AnalyticsService
+  ) {}
 
   contactInfo = {
     email: 'elhandaayo@gmail.com',
@@ -37,6 +41,7 @@ export class ContactComponent {
   openFormModal() {
     this.showFormModal = true;
     document.body.style.overflow = 'hidden';
+    this.analytics.trackContactFormOpen('mobile_menu');
   }
 
   closeFormModal() {
@@ -45,6 +50,7 @@ export class ContactComponent {
   }
 
   callPhone() {
+    this.analytics.trackPhoneClick('mobile_menu');
     window.location.href = `tel:${this.contactInfo.phone}`;
   }
 
@@ -96,6 +102,9 @@ export class ContactComponent {
       console.log('Email envoyé avec succès!', response);
       this.showNotificationPopup('Merci pour votre message ! Je vous répondrai dans les plus brefs délais.', 'success');
       
+      // Track successful form submission
+      this.analytics.trackContactFormSubmit(true, 'email');
+      
       // Réinitialiser le formulaire et fermer le modal
       this.formData = { name: '', email: '', subject: '', message: '' };
       this.closeFormModal();
@@ -103,6 +112,9 @@ export class ContactComponent {
     } catch (error) {
       console.error('Erreur lors de l\'envoi de l\'email:', error);
       this.showNotificationPopup('Une erreur est survenue. Veuillez réessayer ou me contacter directement à elhandaayo@gmail.com', 'error');
+      
+      // Track failed form submission
+      this.analytics.trackContactFormSubmit(false, 'email');
     } finally {
       this.isSubmitting = false;
     }

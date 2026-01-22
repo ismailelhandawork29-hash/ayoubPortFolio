@@ -1,5 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { TranslationService } from '../../services/translation.service';
+import { AnalyticsService } from '../../services/analytics.service';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -15,7 +16,10 @@ export class HeroComponent implements OnInit, OnDestroy {
   isDeleting = false;
   private langSubscription: Subscription | undefined;
 
-  constructor(public translationService: TranslationService) {
+  constructor(
+    public translationService: TranslationService,
+    private analytics: AnalyticsService
+  ) {
     this.titles = this.translationService.translate('hero.titles');
   }
 
@@ -68,6 +72,10 @@ export class HeroComponent implements OnInit, OnDestroy {
     if (element) {
       element.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
+  }
+
+  callPhone() {
+    this.analytics.trackPhoneClick('hero');
   }
 }
 

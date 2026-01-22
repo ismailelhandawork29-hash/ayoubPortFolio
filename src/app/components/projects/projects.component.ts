@@ -1,5 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { TranslationService } from '../../services/translation.service';
+import { AnalyticsService } from '../../services/analytics.service';
 import { Subscription } from 'rxjs';
 
 interface Project {
@@ -30,7 +31,10 @@ export class ProjectsComponent implements OnInit, OnDestroy {
   private cardAutoSlideIntervals: Map<number, any> = new Map();
   isAutoSliding = true;
 
-  constructor(public translationService: TranslationService) {}
+  constructor(
+    public translationService: TranslationService,
+    private analytics: AnalyticsService
+  ) {}
 
   ngOnInit() {
     this.updateContent();
@@ -606,17 +610,27 @@ export class ProjectsComponent implements OnInit, OnDestroy {
 
   projects: Project[] = [];
 
-  nextSlide(project: Project): void {
+  nextSlide(project: Project, trackAnalytics: boolean = false): void {
     if (project.images && project.currentSlide !== undefined) {
       project.currentSlide = (project.currentSlide + 1) % project.images.length;
+      
+      // Track only manual navigation in modal
+      if (trackAnalytics && this.selectedProject?.id === project.id) {
+        this.analytics.trackProjectImageNavigation(project.title, 'next');
+      }
     }
   }
 
-  prevSlide(project: Project): void {
+  prevSlide(project: Project, trackAnalytics: boolean = false): void {
     if (project.images && project.currentSlide !== undefined) {
       project.currentSlide = project.currentSlide === 0 
         ? project.images.length - 1 
         : project.currentSlide - 1;
+      
+      // Track only manual navigation in modal
+      if (trackAnalytics && this.selectedProject?.id === project.id) {
+        this.analytics.trackProjectImageNavigation(project.title, 'previous');
+      }
     }
   }
 
@@ -630,6 +644,9 @@ export class ProjectsComponent implements OnInit, OnDestroy {
     this.selectedProject = project;
     document.body.style.overflow = 'hidden'; // Prevent background scrolling
     this.startAutoSlide();
+    
+    // Track project view
+    this.analytics.trackProjectView(project.title, project.url);
   }
 
   closeModal(): void {

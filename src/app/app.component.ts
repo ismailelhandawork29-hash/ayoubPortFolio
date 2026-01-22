@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AnalyticsService } from './services/analytics.service';
 
 @Component({
   selector: 'app-root',
@@ -7,5 +8,9 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'Ayoub El Handa - Portfolio';
+
+  constructor(private analytics: AnalyticsService) {
+    // Analytics service automatically initializes scroll and section tracking
+  }
 }
 
