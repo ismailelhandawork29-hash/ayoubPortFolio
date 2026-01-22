@@ -4,68 +4,12 @@
         xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
         http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
 
-  <!-- Page principale -->
+  <!-- Page principale - Portfolio complet -->
   <url>
     <loc>https://www.ayoubelhanda.com/</loc>
     <lastmod>2026-01-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
-  </url>
-
-  <!-- Section Hero -->
-  <url>
-    <loc>https://www.ayoubelhanda.com/#hero</loc>
-    <lastmod>2026-01-22</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-  </url>
-
-  <!-- Section À propos -->
-  <url>
-    <loc>https://www.ayoubelhanda.com/#about</loc>
-    <lastmod>2026-01-22</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <!-- Section Compétences -->
-  <url>
-    <loc>https://www.ayoubelhanda.com/#skills</loc>
-    <lastmod>2026-01-22</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <!-- Section Projets -->
-  <url>
-    <loc>https://www.ayoubelhanda.com/#projects</loc>
-    <lastmod>2026-01-22</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-  </url>
-
-  <!-- Section Expériences -->
-  <url>
-    <loc>https://www.ayoubelhanda.com/#experience</loc>
-    <lastmod>2026-01-22</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <!-- Section Formation -->
-  <url>
-    <loc>https://www.ayoubelhanda.com/#education</loc>
-    <lastmod>2026-01-22</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <!-- Section Contact -->
-  <url>
-    <loc>https://www.ayoubelhanda.com/#contact</loc>
-    <lastmod>2026-01-22</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.8</priority>
   </url>
 
 </urlset>
