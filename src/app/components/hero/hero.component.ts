@@ -77,5 +77,9 @@ export class HeroComponent implements OnInit, OnDestroy {
   callPhone() {
     this.analytics.trackPhoneClick('hero');
   }
+
+  trackSocialClick(platform: string, url: string) {
+    this.analytics.trackSocialClick(platform, url);
+  }
 }
 
